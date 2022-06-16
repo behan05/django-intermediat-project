@@ -1,0 +1,54 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row">
+    <div class="col-sm-10">
+        <h4 class="text-center alert alert-info" style="margin-left: 150px;">| Show DataBase Credential |</h4>
+        <table class=" table table-hover text-center" style="margin-left: 150px;">
+            <thead>
+                <tr>
+                    <th scope="col ">Id</th>
+                    <th scope="col ">Fname</th>
+                    <th scope="col ">Lname</th>
+                    <th scope="col ">Uname</th>
+                    <th scope="col ">Email</th>
+                    <th scope="col ">Number</th>
+                    <th scope="col ">Password</th>
+                    <th scope="col ">CNF-Password</th>
+                    <th scope="col ">Data_Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for info in data %}
+                <tr>
+                    <th scope="row ">{{info.id}}</th>
+                    <td>{{info.fname}}</td>
+                    <td>{{info.lname}}</td>
+                    <td>{{info.uname}}</td>
+                    <td>{{info.email}}</td>
+                    <td>{{info.phone}}</td>
+                    <td>{{info.password}}</td>
+                    <td>{{info.cnf_password}}</td>
+                    <td>{{info.data_time}}</td>
+                    <td>
+                        <a href="{% url 'update' info.id %}" class="btn btn-warning ">Edit</a>
+                        <a href="{% url 'delete' info.id %}" class="btn btn-outline-danger ">Delete</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% if data.has_previous %}
+    <nav aria-label="Page navigation example" style="margin-left: 150px;">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{data.previous_page_number}}">Previous</a></li>
+        </ul>
+    </nav>
+    {% endif %} {% if data.has_next %}
+    <nav aria-label="Page navigation example" style="margin-left: 150px;">
+        <ul class="pagination">
+            <li class="page-item"><a class="page-link" href="?page={{data.next_page_number}}">Next</a></li>
+        </ul>
+    </nav>
+    {% endif %}
+</div>
+{% endblock content %}
